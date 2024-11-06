@@ -1,0 +1,53 @@
+schema: '2.0'
+stages:
+  data_collection:
+    cmd: python dc.py
+    deps:
+    - path: dc.py
+      hash: md5
+      md5: 14bbaf6949b20f8293aa72d689051a90
+      size: 286
+    outs:
+    - path: data/raw
+      hash: md5
+      md5: 873463c30bba9c40efec24cd735b6f43.dir
+      size: 5340438
+      nfiles: 1
+  preprocess:
+    cmd: python pre.py
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: 873463c30bba9c40efec24cd735b6f43.dir
+      size: 5340438
+      nfiles: 1
+    - path: pre.py
+      hash: md5
+      md5: 574cd8cb045d288d7e0c69c66727d230
+      size: 766
+    outs:
+    - path: data/processed/x.csv
+      hash: md5
+      md5: 58fb454c598eb2daeeecc9a6742091c9
+      size: 2814287
+    - path: data/processed/y.csv
+      hash: md5
+      md5: eba1129ce1ec48005f19e9e1804ce400
+      size: 469043
+  model_build:
+    cmd: python mb.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: f2e8ebb8e526ff96b0e4774f2f7ee657.dir
+      size: 3283346
+      nfiles: 3
+    - path: mb.py
+      hash: md5
+      md5: d2d54730bc07b7edc748be3361a29bfd
+      size: 632
+    outs:
+    - path: model.pkl
+      hash: md5
+      md5: 6cd9e47173edc81bf3a26466f03b2f88
+      size: 102634393

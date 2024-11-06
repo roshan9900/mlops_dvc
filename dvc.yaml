@@ -1,0 +1,25 @@
+stages:
+  data_collection:
+    cmd: python dc.py
+    deps:
+    - dc.py
+    outs:
+    - data/raw
+
+  preprocess:
+    cmd: python pre.py
+    deps:
+    - data/raw
+    - pre.py
+    outs:
+    - data/processed/x.csv
+    - data/processed/y.csv
+
+
+  model_build:
+    cmd: python mb.py
+    deps:
+    - data/processed
+    - mb.py
+    outs:
+    - model.pkl
